@@ -1,14 +1,35 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
+    'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+}
+.nav li {
+  padding: 0.5em;
+  margin: 1em;
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px lightgray;
+}
+.navlink {
+  text-decoration: none;
+}
+
+.homeText {
+  margin-left: 2em;
+}
+.houseList li {
+  padding: 0.4em;
+  color: green;
 }
