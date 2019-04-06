@@ -93,21 +93,21 @@ class Contributor extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: {
-        response: '',
-        postPrice: '',
-        postDescription: '',
-        responseToPost: '',
-      },
+      response: '',
+      postPrice: '',
+      postDescription: '',
+      responseToPost: '',
     };
   }
 
-  handleInput = event => {
+  handleInputPrice = event => {
     this.setState({
-      data: {
-        postPrice: event.target.value,
-        postDescription: event.target.value,
-      },
+      postPrice: event.target.value,
+    });
+  };
+  handleInputDescription = event => {
+    this.setState({
+      postDescription: event.target.value,
     });
   };
 
@@ -118,13 +118,18 @@ class Contributor extends Component {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ post: this.state.post }),
+      body: JSON.stringify({
+        postPrice: this.state.postPrice,
+        postDescription: this.state.postDescription,
+      }),
     });
+    console.log(res);
     const body = await res.text();
     this.setState({ responseToPost: body });
   };
 
   render() {
+    console.log(this.state.responseToPost);
     return (
       <div>
         <h3>thank you for you contribution</h3>
@@ -134,15 +139,15 @@ class Contributor extends Component {
             <input
               type="number"
               name="price"
-              value={this.state.data.postPrice}
-              onChange={this.handleInput}
+              value={this.state.postPrice}
+              onChange={this.handleInputPrice}
             />
             <label htmlFor="description">description</label>
             <input
               type="text"
               name="description"
-              onChange={this.handleInput}
-              value={this.state.data.postDescription}
+              onChange={this.handleInputDescription}
+              value={this.state.postDescription}
             />
             <button>submit</button>
           </form>
