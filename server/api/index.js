@@ -41,8 +41,8 @@ apiRouter
 
       const house = {
         houseId: lastId,
-        price: price,
-        description: description,
+        price,
+        description,
       };
       fakeDB.push(house);
       res.send(house);

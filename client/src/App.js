@@ -111,21 +111,28 @@ class Contributor extends Component {
     });
   };
 
-  handleSubmit = async event => {
+  handleSubmit = event => {
     event.preventDefault();
-    const res = await fetch('/api/houses', {
+    this.setState({
+      postPrice: '',
+      postDescription: '',
+    });
+    fetch('/api/houses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        postPrice: this.state.postPrice,
-        postDescription: this.state.postDescription,
+        price: this.state.postPrice,
+        description: this.state.postDescription,
       }),
-    });
-    console.log(res);
-    const body = await res.text();
-    this.setState({ responseToPost: body });
+    })
+      .then(res => res.json())
+      .then(data => {
+        this.setState({
+          responseToPost: data,
+        });
+      });
   };
 
   render() {
