@@ -1,51 +1,47 @@
 const apiRouter = require('express').Router();
+const { addInfo, bringInfo } = require('../dataBase/query.js');
+const { validateHouse } = require('../validation');
 
-const fakeDB = [
-  {
-    houseId: 1,
-    price: 300000,
-    description: `3 rooms house`,
-  },
-  {
-    houseId: 2,
-    price: 150000,
-    description: `1 room flat `,
-  },
-  {
-    houseId: 3,
-    price: 200000,
-    description: `2 rooms flat`,
-  },
-];
-
-let lastId = 3;
 apiRouter
   .route('/houses')
   .get((req, res) => {
-    res.send(fakeDB);
+    bringInfo().then(result => res.send(result));
   })
   .post((req, res) => {
-    let { price, description } = req.body;
-
-    if (typeof price === 'undefined') {
-      res.status(400).end(`price field is require`);
-      return;
+    if (!Array.isArray(req.body)) {
+      return res.status(400).json({ error: 'data should be an array' });
     }
 
-    price = parseInt(price, 10);
-    if (Number.isNaN(price) || price <= 0) {
-      res.status(400).end(`the price should be positive`);
-      return;
-    } else {
-      lastId++;
+    const processedData = req.body.map(validateHouse);
 
-      const house = {
-        houseId: lastId,
-        price,
-        description,
-      };
-      fakeDB.push(house);
-      res.send(house);
+    const validData = [];
+    const invalidData = [];
+
+    processedData.forEach(el => {
+      if (el.valid) {
+        validData.push(el);
+      } else {
+        invalidData.push(el);
+      }
+    });
+
+    const report = {
+      valid: validData.length,
+      invalid: invalidData,
+    };
+
+    if (validData.length) {
+      try {
+        validData.map(el => {
+          return addInfo(el.raw);
+        });
+        return res.send(report);
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json({ error: err.message });
+      }
+    } else {
+      res.json(report);
     }
   });
 
