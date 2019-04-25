@@ -1,54 +1,46 @@
-const db = require('./db.js');
-
-const addHouses = `
-INSERT INTO houses(
-    link,
-    location_country,
-    location_city,
-    size_rooms,
-    price_value,
-    price_currency
-)values ?;
-`;
+const { execQuery, connection, mysql } = require('./db.js');
 
 // we should resive an array here
 async function addInfo(house) {
   try {
-    await db.execQuery(`INSERT INTO houses SET ?`, house);
+    await execQuery(`INSERT INTO houses SET ?`, house);
   } catch (error) {
-    console.log(error);
+    console.log(error, 'query');
   }
 }
 
 async function bringInfo() {
   try {
-    const data = await db.execQuery(`SELECT * FROM houses`);
+    const data = await execQuery(`SELECT * FROM houses`);
     console.log(data, 'query');
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(error, 'query');
+  }
+}
+
+async function formData(condition, order_field, order_direction, HOUSES_PER_PAGE, offset, params) {
+  try {
+    const data = await execQuery(
+      `
+      Select * from houses 
+      where 
+      ${condition.join(' and ')} 
+      order by 
+      ${(connection.escapeId(order_field), true)} ${order_direction}
+      limit ${HOUSES_PER_PAGE}
+      offset ${offset}
+      `,
+      params,
+    );
+    return data;
+  } catch (err) {
+    console.log(err, `query new`);
   }
 }
 
 module.exports = {
   addInfo,
   bringInfo,
+  formData,
 };
-
-// [
-//   {
-//     "link": "http://funda.nl/url",
-//     "location_country": "Iraq",
-//     "location_city": "baghdad",
-//     "size_rooms": 2,
-//     "price_value": 200150,
-//     "price_currency": "EURO",
-//   },
-//   {
-//     "link": "HI",
-//     "location_city": "baghdad",
-//     "size_rooms": "two",
-//     "price_value": "$ 200150.00",
-//     "price_currency": "USD",
-//   },
-// ];

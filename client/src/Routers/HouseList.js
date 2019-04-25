@@ -13,7 +13,7 @@ export default class HousesList extends Component {
     return json;
   };
   componentDidMount() {
-    this.FetchData('/api/houses').then(data => {
+    this.FetchData('/api/houses/list').then(data => {
       this.setState({
         houses: data,
       });

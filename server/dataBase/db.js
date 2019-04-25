@@ -1,6 +1,6 @@
-var mysql = require('mysql');
-var util = require('util');
-var connection = mysql.createConnection({
+const mysql = require('mysql');
+const util = require('util');
+const connection = mysql.createConnection({
   host: 'localhost',
   user: 'project10',
   password: 'project18_db',
@@ -33,4 +33,5 @@ injectData();
 module.exports = {
   execQuery,
   connection,
+  mysql,
 };

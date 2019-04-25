@@ -7,6 +7,7 @@ export default class Form extends Component {
       houseInfo: '',
       sub: '',
       error: null,
+      report: null,
     };
   }
 
@@ -34,7 +35,7 @@ export default class Form extends Component {
         if (data.error) {
           this.setState({ error: data.error });
         } else {
-          this.setState({ error: null });
+          this.setState({ error: null, report: data });
           console.log(data);
         }
         console.log(data);
@@ -47,7 +48,9 @@ export default class Form extends Component {
   };
 
   render() {
-    const { error } = this.state;
+    console.count('render');
+    const { report } = this.state;
+
     return (
       <div>
         <h3 style={{ margin: '0.6em', color: 'lightGreen' }}>Form submission</h3>
@@ -77,9 +80,21 @@ export default class Form extends Component {
             submit
           </button>
           <br />
-          {error && <div>{error}</div>}
+          {!!report && <Report report={report} />}
         </form>
       </div>
     );
   }
 }
+const Report = ({ report }) => (
+  <div style={{ padding: '1em', color: 'red', fontWeight: 'bold', fontStyle: 'italic' }}>
+    valid houses :{report.valid}
+    <br />
+    invalid houses {report.invalid.length}:
+    {report.invalid.map(data => (
+      <div>
+        messages:<pre>{JSON.stringify(data.errors, null, 2)}</pre>
+      </div>
+    ))}
+  </div>
+);
