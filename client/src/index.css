@@ -19,13 +19,13 @@ code {
   padding: 0.5em;
   margin: 1em;
   padding: 1em;
-  border: 2px solid lightgreen;
+  border: 2px solid coral;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px 2px lightgreen;
+  box-shadow: 0px 0px 10px 2px coral;
 }
 .navlink {
   text-decoration: none;
-  color: lightgreen;
+  color: coral;
 }
 
 .homeText {
@@ -33,5 +33,9 @@ code {
 }
 .houseList li {
   padding: 0.4em;
-  color: green;
+  color: coral;
+}
+
+label {
+  margin: 1em;
 }

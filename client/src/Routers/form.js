@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../style.scss';
 
 export default class Form extends Component {
   constructor(props) {
@@ -48,46 +49,32 @@ export default class Form extends Component {
   };
 
   render() {
-    console.count('render');
+    console.log(this.state.houseInfo);
     const { report } = this.state;
 
     return (
-      <div>
-        <h3 style={{ margin: '0.6em', color: 'lightGreen' }}>Form submission</h3>
-        <form onSubmit={this.handleSub}>
-          <textarea
-            onChange={this.handleInput}
-            value={this.state.houseInfo}
-            style={{
-              width: '60%',
-              height: '150px',
-              margin: '0.6em',
-            }}
-          />
-          <button
-            style={{
-              display: 'flex',
-              margin: '0.6em',
-              background: 'lightGreen',
-              color: 'white',
-              border: 'none',
-              textDecoration: 'none',
-              padding: '1em',
-              borderRadius: '5px',
-            }}
-            type="submit"
-          >
-            submit
-          </button>
-          <br />
-          {!!report && <Report report={report} />}
-        </form>
+      <div className="form-div">
+        <div>
+          <h3>Form submission</h3>
+          <form onSubmit={this.handleSub}>
+            <div>
+              <div>
+                <textarea onChange={this.handleInput} value={this.state.houseInfo} />
+              </div>
+              <div>
+                <button type="submit">submit</button>
+              </div>
+            </div>
+            <br />
+            {!!report && <Report report={report} />}
+          </form>
+        </div>
       </div>
     );
   }
 }
 const Report = ({ report }) => (
-  <div style={{ padding: '1em', color: 'red', fontWeight: 'bold', fontStyle: 'italic' }}>
+  <div>
     valid houses :{report.valid}
     <br />
     invalid houses {report.invalid.length}:

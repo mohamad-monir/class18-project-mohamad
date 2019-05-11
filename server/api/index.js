@@ -1,10 +1,11 @@
 const apiRouter = require('express').Router();
-const { addInfo, bringInfo, formData } = require('../dataBase/query.js');
+const { addInfo } = require('../dataBase/query.js');
+const { execQuery, connection } = require('../dataBase/db.js');
 const { validateHouse } = require('../validation');
 
 apiRouter
   .route('/houses')
-  .get((req, res) => {
+  .get(async (req, res) => {
     console.log(req.query);
     let {
       price_min = 0,
@@ -74,9 +75,34 @@ apiRouter
       params.push(location_city);
     }
 
-    formData(condition, order_field, order_direction, HOUSES_PER_PAGE, offset, params).then(
-      result => res.send(result),
-    );
+    const queryBody = `
+    from houses 
+    where 
+    ${condition.join(' and ')} 
+    `;
+
+    const queryItem = `
+    select * 
+    ${queryBody}
+    order by 
+    ${(connection.escapeId(order_field), true)} ${order_direction}
+    limit ${HOUSES_PER_PAGE}
+    offset ${offset}
+    `;
+    const queryTotal = ` 
+  select count(id) as total
+  ${queryBody}
+  `;
+
+    try {
+      const total = await execQuery(queryTotal, params);
+      const item = await execQuery(queryItem, params);
+      return res.json({ total: total[0].total, item, pageSize: HOUSES_PER_PAGE });
+    } catch (err) {
+      res.status(400).json({ error: err.message });
+    }
+
+    return res.json({ totalHouses, itemHouses });
   })
   .post((req, res) => {
     if (!Array.isArray(req.body)) {
@@ -85,26 +111,26 @@ apiRouter
 
     const processedData = req.body.map(validateHouse);
 
-    const validData = [];
-    const invalidData = [];
+    const validHouses = [];
+    const invalidHouses = [];
 
-    processedData.forEach(el => {
-      if (el.valid) {
-        validData.push(el);
+    processedData.forEach(house => {
+      if (house.valid) {
+        validHouses.push(house);
       } else {
-        invalidData.push(el);
+        invalidHouses.push(house);
       }
     });
 
     const report = {
-      valid: validData.length,
-      invalid: invalidData,
+      valid: validHouses.length,
+      invalid: invalidHouses,
     };
 
-    if (validData.length) {
+    if (validHouses.length) {
       try {
-        validData.map(el => {
-          return addInfo(el.raw);
+        validHouses.map(house => {
+          return addInfo(house.raw);
         });
         return res.send(report);
       } catch (err) {
@@ -116,42 +142,8 @@ apiRouter
     }
   });
 
-// apiRouter.route(`/houses/list`).get((req, res) => {
-//   bringInfo().then(result => res.send(result));
-// });
-
-// apiRouter
-//   .route('/houses/:id')
-//   .get((req, res) => {
-//     const { id } = req.params;
-//     const item = fakeDB.find(house => {
-//       return house.houseId === parseInt(id, 10);
-//     });
-//     console.log(id);
-//     if (item) {
-//       res.json(item);
-//     } else {
-//       res.send(`there is no house with this ID`);
-//     }
-//   })
-//   .delete((req, res) => {
-//     const { id } = req.params;
-
-//     const index = fakeDB.findIndex(house => {
-//       return house.houseId === parseInt(id, 10);
-//     });
-
-//     if (index > -1) {
-//       fakeDB.splice(index, 1);
-
-//       res.send(`this house id ${index} was deleted`);
-//     } else {
-//       res.send(`there is no house with this id`);
-//     }
-//   });
-
-// apiRouter.use((req, res) => {
-//   res.status(404).end();
-// });
+apiRouter.use((req, res) => {
+  res.status(404).end();
+});
 
 module.exports = apiRouter;

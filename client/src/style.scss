@@ -1,0 +1,437 @@
+$Em: 1em;
+$alternate-color: #e7f1f6;
+
+@font-face {
+  font-family: charter;
+  src: url(./HackYourEstate/fonts/charter/webfonts/charter_regular-webfont.ttf);
+}
+@font-face {
+  font-family: charter bold;
+  src: url(./HackYourEstate/fonts/charter/webfonts/charter_bold-webfont.ttf);
+}
+@font-face {
+  font-family: charter bold italic;
+  src: url(./HackYourEstate/fonts/charter/webfonts/charter_bold_italic-webfont.ttf);
+}
+@font-face {
+  font-family: charter italic;
+  src: url(./HackYourEstate/fonts/charter/webfonts/charter_italic-webfont.ttf);
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: charter;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: $alternate-color;
+
+  .Header {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    .menu-btn {
+      visibility: hidden;
+    }
+
+    img {
+      width: 100%;
+      position: relative;
+      height: 20%;
+    }
+    ul {
+      position: absolute;
+      top: $Em * 0.4;
+      right: 0;
+      color: red;
+      padding: 20px;
+      li {
+        list-style: none;
+        display: inline-block;
+        font-family: charter bold;
+
+        margin-right: $Em * 3;
+
+        .navlink {
+          text-decoration: none;
+          font-size: $Em * 2;
+          color: black;
+          background-color: lightgray;
+          border: 1px solid lightgray;
+          border-radius: $Em * 0.5;
+          padding: $Em * 0.4;
+          transition: 0.2;
+          &:hover {
+            border: 1px solid gray;
+            box-shadow: 3px 3px 4px whitesmoke;
+            background-color: gray;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+  .headerText {
+    position: absolute;
+    font-family: charter bold italic;
+    color: black;
+    text-align: center;
+    top: 40%;
+    right: 30%;
+    font-size: $Em * 2;
+    span {
+      font-size: $Em * 2;
+    }
+  }
+  .home-content {
+    #feature-title {
+      font-size: $Em * 2.5;
+      text-align: center;
+      padding: $Em * 0.5;
+    }
+    .img-feature-div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+
+      .column p {
+        font-size: $Em * 2;
+      }
+      img {
+        width: $Em * 14;
+      }
+    }
+    .benefit-icons {
+      background-color: white;
+      #benefit-title {
+        text-align: center;
+        font-size: $Em * 2.5;
+        padding: $Em * 2;
+      }
+      .benefit-items-align {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .column-benefit-icons {
+          display: flex;
+          flex-direction: column;
+          padding: $Em * 2;
+          img {
+            width: $Em * 6;
+            padding: $Em * 1;
+          }
+        }
+        .column-benefit-para {
+          padding: $Em * 2;
+
+          p {
+            padding: $Em * 1;
+            font-size: $Em * 1.5;
+          }
+        }
+      }
+    }
+    .written-item-div {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      img {
+        margin: $Em * 3;
+        width: $Em * 20;
+        height: $Em * 15;
+      }
+    }
+    .beforeFooter {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .wrapper {
+        font-size: $Em * 1.5;
+        padding: $Em * 2;
+        background-color: white;
+        text-align: center;
+      }
+    }
+  }
+  .footer {
+    font-size: $Em * 2;
+    text-align: center;
+    padding: $Em * 1.5;
+    color: white;
+    background-color: #3f3f3f;
+  }
+
+  .contribute-div {
+    display: flex;
+    flex-direction: column;
+    height: $Em * 65;
+    form {
+      display: flex;
+      flex-direction: column;
+      label {
+        padding: $Em * 0.5;
+      }
+      select {
+        padding: $Em * 0.5;
+        margin: $Em * 1;
+        width: $Em * 10;
+      }
+    }
+    .page-nu {
+      display: flex;
+      justify-content: center;
+      div {
+        margin: $Em * 2;
+        padding: $Em * 0.5;
+        border: 1px solid black;
+      }
+    }
+  }
+
+  .form-div {
+    h3 {
+      text-align: center;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+
+      textarea {
+        width: $Em * 30;
+        height: $Em * 30;
+        margin: $Em * 1;
+      }
+      button {
+        margin: $Em * 1;
+        background-color: coral;
+        color: white;
+        border-style: none;
+        padding: $Em * 1;
+      }
+    }
+  }
+}
+
+///////////////////////////////
+@media screen and (max-width: 540px) {
+  $Em: 1em;
+  $alternate-color: #e7f1f6;
+
+  @font-face {
+    font-family: charter;
+    src: url(./HackYourEstate/fonts/charter/webfonts/charter_regular-webfont.ttf);
+  }
+  @font-face {
+    font-family: charter bold;
+    src: url(./HackYourEstate/fonts/charter/webfonts/charter_bold-webfont.ttf);
+  }
+  @font-face {
+    font-family: charter bold italic;
+    src: url(./HackYourEstate/fonts/charter/webfonts/charter_bold_italic-webfont.ttf);
+  }
+  @font-face {
+    font-family: charter italic;
+    src: url(./HackYourEstate/fonts/charter/webfonts/charter_italic-webfont.ttf);
+  }
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: charter;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    background-color: $alternate-color;
+
+    .Header {
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column;
+      .menu-btn {
+        visibility: visible;
+        display: inline;
+        position: absolute;
+        left: 0;
+        top: $Em * 0.4;
+        padding: 20px;
+        margin: 10px;
+        color: white;
+        background-color: gray;
+        border-style: none;
+        border-radius: 5px;
+      }
+      .nav-list-inactive {
+        position: absolute;
+        margin-right: 0;
+      }
+      .nav-list-active {
+        ul {
+          display: flex;
+          flex-direction: column;
+          li {
+            list-style: none;
+            font-family: charter bold;
+            margin: 1em;
+            .navlink {
+              text-decoration: none;
+              font-size: $Em * 1.1;
+              color: black;
+            }
+          }
+        }
+      }
+
+      img {
+        width: 25.7em;
+        position: relative;
+        height: 31em;
+      }
+    }
+    .headerText {
+      position: absolute;
+      font-family: charter bold italic;
+      color: black;
+      text-align: center;
+      top: 40%;
+      right: 10%;
+      font-size: $Em * 1.5;
+      span {
+        font-size: $Em * 1.5;
+      }
+    }
+    .home-content {
+      #feature-title {
+        font-size: $Em * 2.5;
+        text-align: center;
+        padding: $Em * 0.5;
+      }
+      .img-feature-div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+
+        .column p {
+          font-size: $Em * 2;
+        }
+        img {
+          width: $Em * 14;
+        }
+      }
+      .benefit-icons {
+        background-color: white;
+        #benefit-title {
+          text-align: center;
+          font-size: $Em * 2.5;
+          padding: $Em * 2;
+        }
+        .benefit-items-align {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+
+          .column-benefit-icons {
+            display: flex;
+            flex-direction: column;
+            padding: $Em * 2;
+            img {
+              width: $Em * 6;
+              padding: $Em * 1;
+            }
+          }
+          .column-benefit-para {
+            padding: $Em * 2;
+
+            p {
+              padding: $Em * 1;
+              font-size: $Em * 1.5;
+            }
+          }
+        }
+      }
+      .written-item-div {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        img {
+          margin: $Em * 3;
+          width: $Em * 20;
+          height: $Em * 15;
+        }
+      }
+      .beforeFooter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        .wrapper {
+          font-size: $Em * 1.5;
+          padding: $Em * 2;
+          background-color: white;
+          text-align: center;
+        }
+      }
+    }
+    .footer {
+      font-size: $Em * 2;
+      text-align: center;
+      padding: $Em * 1.5;
+      color: white;
+      background-color: #3f3f3f;
+    }
+
+    .contribute-div {
+      display: flex;
+      flex-direction: column;
+      height: $Em * 65;
+      form {
+        display: flex;
+        flex-direction: column;
+        label {
+          padding: $Em * 0.5;
+        }
+        select {
+          padding: $Em * 0.5;
+          margin: $Em * 1;
+          width: $Em * 10;
+        }
+      }
+      .page-nu {
+        display: flex;
+        justify-content: center;
+        div {
+          margin: $Em * 1;
+          padding: $Em * 0.5;
+          border: 1px solid black;
+        }
+      }
+    }
+
+    .form-div {
+      h3 {
+        text-align: center;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+
+        textarea {
+          width: $Em * 20;
+          height: $Em * 15;
+          margin: $Em * 1;
+        }
+        button {
+          margin: $Em * 1;
+          background-color: coral;
+          color: white;
+          border-style: none;
+          padding: $Em * 1;
+        }
+      }
+    }
+  }
+}

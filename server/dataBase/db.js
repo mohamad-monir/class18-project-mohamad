@@ -25,7 +25,7 @@ async function injectData() {
   try {
     await execQuery(create_houses_Table);
   } catch (error) {
-    console.log(error.message);
+    console.log(error, `db.js`);
   }
 }
 injectData();
